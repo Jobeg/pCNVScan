@@ -1,0 +1,32 @@
+How to install CNVScan
+
+Common Process
+
+   1. Download the compressed library.
+
+   2. Uncompress the file into a directory which you want.
+
+      $ tar xvfz CNVScan-1.2.1.tgz
+
+   3. Download and install gbfp (http://code.google.com/p/gbfp/)
+
+
+Install gbfp (required)
+
+   1. gbfp a GenBank flatfile parser library with high speed can be found at
+	http://code.google.com/p/gbfp/
+
+   2. Follow the installation instructions before install CNVScan
+
+Install CNVScan
+
+   1. Make and install the library
+
+      $ cd CNVScan-1.2.1
+      $ make
+
+
+   2. Launch CNVScan
+
+      $ ./CNVScan <options>
+
