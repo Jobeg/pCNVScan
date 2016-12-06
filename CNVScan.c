@@ -26,12 +26,11 @@ void printHelp(char*prog){
 	fprintf(stderr, "OPTIONS:\n"
 	"-p String [REQUIRED]. Path to a valid .pileup file. The alignment must have been done on the same reference as the reference file.\n"
 	"-o String [REQUIRED]. Path to the output file. Output a list of copy numbers by genes.\n"
-	"-i String [REQUIRED1]. Path to a valid input .gbk reference file. No fasta file required.\n"
 	"-g String [REQUIRED2]. Path to a valid .gff reference file. If set you have to give also a fasta file in -f option.\n");
 	fprintf(stderr, "-f String [REQUIRED2]. Path to a valid .fasta file. Should be the same reference as the .gff file.\n"
 	"-s Integer [OPTIONAL]. Pattern size for iterative search. Default: 6.\n"
 	"-h Print this help and exit.\n");
-	fprintf(stderr, "Usage: %s -s [int Pattern size] -i [.gbk reference file] -p [Pileup sample file] -o [Output file]\n", prog);
+	fprintf(stderr, "Usage: %s -s [int Pattern size] -g [.gff reference file] -f [.fasta reference file] -p [Pileup sample file] -o [Output file]\n", prog);
 }
 
 /*============================= Main program =============================*/
@@ -85,9 +84,8 @@ int main(int argc, char *argv[]){
 	/* Input format check */
 	if(gbkFile==NULL){
 		if(gffFile==NULL && fastaFile==NULL){
-			fprintf(stderr, "\nError: missing or bad input.\n2 Options:\n"
-			"-i <GBK file>"
-			"OR -g <GFF file> -f <FASTA file> (GFF and FASTA should be in the same reference assembly.");
+			fprintf(stderr, "\nError: missing or bad input.\n"
+			"-g <GFF file> -f <FASTA file> (GFF and FASTA should be in the same reference assembly.");
 			printHelp(argv[0]);
 			exit(EXIT_FAILURE);
 		}
@@ -112,7 +110,7 @@ int main(int argc, char *argv[]){
 	else{
 		/*Extract reference informations from gbk file
 		Each chromosome is on a special structure*/
-		reference=ExtractAllFromGbk(gbkFile);
+		/*reference=ExtractAllFromGbk(gbkFile);*/
 	}
 
 	/*Extract the coverage for every position in each chromosome*/

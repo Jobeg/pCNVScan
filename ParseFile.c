@@ -11,7 +11,6 @@
 #include <regex.h>
 #include <unistd.h>
 #include <string.h>
-#include <gbfp.h>
 
 /*Max line size for pileup file*/
 #define MAX_LINE_SIZE 100000
@@ -188,7 +187,7 @@ char* regex(const char *regexp, char* string){
 	return subString;
 }
 
-static char *getQualValue(char *sQualifier, gb_feature *ptFeature) {
+/*static char *getQualValue(char *sQualifier, gb_feature *ptFeature) {
     static char *null = "";
     gb_qualifier *i;
 
@@ -196,15 +195,15 @@ static char *getQualValue(char *sQualifier, gb_feature *ptFeature) {
         if (strcmp(sQualifier, i->sQualifier) == 0)
             return i->sValue;
     return null;
-}
+}*/
 
 /*Extract informations from a gbk file.
 Return chromosome sequence and all genes features.*/
-C* ExtractAllFromGbk(char* gbk){
+/*C* ExtractAllFromGbk(char* gbk){
 	C*reference=NULL;
-	
+*/	
 	/* USE GBFP PROGRAM ON A GPL LICENSEv2 (http://code.google.com/p/gbfp/) */
-	gb_data **pptSeqData, *ptSeqData;
+/*	gb_data **pptSeqData, *ptSeqData;
 	gb_feature *ptFeature;
 
 	char *sQualifier = "locus_tag";
@@ -213,41 +212,37 @@ C* ExtractAllFromGbk(char* gbk){
 	G currentGene=NULL;
 
 	unsigned int i, j;
-
-	pptSeqData = parseGBFF(gbk); /* parse a GBF file which contains more than one GBF sequence data */
-	for (i = 0; (ptSeqData = *(pptSeqData + i)) != NULL; i++) { /* ptSeqData points a parsed data of a GBF sequence data */
+*/
+/*	pptSeqData = parseGBFF(gbk);*/ /* parse a GBF file which contains more than one GBF sequence data */
+	/*for (i = 0; (ptSeqData = *(pptSeqData + i)) != NULL; i++) {*/ /* ptSeqData points a parsed data of a GBF sequence data */
 		/* sDef point to the chromosome definition */
-		C currentChromosome=newChromosome(ptSeqData->sDef, ptSeqData->sSequence, ptSeqData->lLength);
-		currentGene=NULL;
+/*		C currentChromosome=newChromosome(ptSeqData->sDef, ptSeqData->sSequence, ptSeqData->lLength);
+		currentGene=NULL;*/
 		/* start of user process */
-		for (j = 0; j < ptSeqData->iFeatureNum; j++) {
+/*		for (j = 0; j < ptSeqData->iFeatureNum; j++) {
 			ptFeature = (ptSeqData->ptFeatures + j);
 			if (strcmp(sFeature, ptFeature->sFeature) == 0) {
 				char*geneName;
-				geneName=malloc(400*sizeof(char));
+				geneName=malloc(400*sizeof(char));*/
 				/*printf(">%li-%li %s(%s)\n", \
 				ptFeature->lStart, \
 				ptFeature->lEnd, \
 				getQualValue(sQualifier2, ptFeature), \
 				getQualValue(sQualifier, ptFeature));*/
-				sprintf(geneName, "%s(%s)", getQualValue(sQualifier2, ptFeature), getQualValue(sQualifier, ptFeature));
+/*				sprintf(geneName, "%s(%s)", getQualValue(sQualifier2, ptFeature), getQualValue(sQualifier, ptFeature));
 				currentGene=newGene(geneName, ptFeature->lStart, ptFeature->lEnd, currentGene);
 				setChrGenes(currentChromosome,currentGene);
 			}
 		}
 		reference=(C*)realloc(reference,(i+1)*sizeof(C));
-		reference[i]=currentChromosome;
-		/*while(currentGene!=NULL){
-			printf("%s\t%d_%d\n", getGenName(currentGene), getGenStart(currentGene), getGenEnd(currentGene));
-			currentGene=getNextGene(currentGene);
-		}*/
+		reference[i]=currentChromosome;*/
 		/* end of user process */
-	}
+	/*}
 	reference=(C*)realloc(reference,(i+2)*sizeof(C));
-	reference[i+1]=NULL;
+	reference[i+1]=NULL;*/
 	/* freeGBData(pptSeqData);  release memory space */
-	return reference;
-}
+/*	return reference;
+}*/
 
 /*Extract informations from a gff AND a fasta file.
 Return chromosome sequence and all genes features.*/
